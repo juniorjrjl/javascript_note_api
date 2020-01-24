@@ -4,7 +4,8 @@ mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/javascriptNote', {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 })
 .then(() => console.log('Mongodb conectado'))
 .catch((err) => console.log(err))

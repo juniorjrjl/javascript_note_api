@@ -54,9 +54,9 @@ router.put('/:id', withAuth, async(req, res) =>{
     try {
         let note = await Note.findById(id);
         if (isOwner(req.user, note)){
-            let note = await Note.findOneAndUpdate(id, 
+            let note = await Note.findOneAndUpdate({_id: id}, 
                             {$set: {title: title, body: body}},
-                            {upsert: true, 'new': true});
+                            {'new': true});
             res.status(200).json(note);
         }else{
             res.sendStatus(403).json({error: 'Permission denided.'});
@@ -72,8 +72,8 @@ router.delete('/:id', withAuth, async (req, res) =>{
     try {
         let note = await Note.findById(id);
         if (isOwner(req.user, note)){
-            await note.delete()
-            res.status(204)
+            await note.delete();
+            res.status(200)
         }else{
             res.sendStatus(403).json({error: 'Permission denided.'});
         }
