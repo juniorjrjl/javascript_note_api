@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+    notedbmongo:
+        image: "mongo:4.2.6"
+        volumes:
+            - ./data:/var/lib/mongo/data
+    noteapi:
+        build:
+            context: .
+        ports:
+            - '3000:3000'
+            - '9229:9229'
+        volumes:
+            - '.:/javascript_note_api'
+        command: /bin/sh -c "npm start" #'npm run dev' para usar nodemon
